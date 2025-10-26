@@ -7,10 +7,10 @@ import app.aaps.plugins.source.BGSourceFragment
 import app.aaps.plugins.source.DexcomPlugin
 import app.aaps.plugins.source.GlimpPlugin
 import app.aaps.plugins.source.MM640gPlugin
+import app.aaps.plugins.source.MobaiSIAppPlugin  // 确保导入
 import app.aaps.plugins.source.NSClientSourcePlugin
 import app.aaps.plugins.source.OttaiPlugin
 import app.aaps.core.interfaces.source.BgSource
-import app.aaps.plugins.source.MobaiSIAppPlugin
 import app.aaps.plugins.source.PoctechPlugin
 import app.aaps.plugins.source.SyaiTagPlugin
 import app.aaps.plugins.source.TomatoPlugin
@@ -25,7 +25,6 @@ import dagger.android.ContributesAndroidInjector
         SourceModule.Bindings::class
     ]
 )
-
 @Suppress("unused")
 abstract class SourceModule {
 
@@ -39,6 +38,7 @@ abstract class SourceModule {
     @ContributesAndroidInjector abstract fun contributesTomatoWorker(): TomatoPlugin.TomatoWorker
     @ContributesAndroidInjector abstract fun contributesOttaiWorker(): OttaiPlugin.OttaiWorker
     @ContributesAndroidInjector abstract fun contributesOTAppWorker(): SyaiTagPlugin.SyaiTagWorker
+    @ContributesAndroidInjector abstract fun contributesMobaiSIAppWorker(): MobaiSIAppPlugin.MobaiSIAppWorker  // 添加这行！
 
     @ContributesAndroidInjector abstract fun contributesRequestDexcomPermissionActivity(): RequestDexcomPermissionActivity
 
@@ -48,6 +48,6 @@ abstract class SourceModule {
         @Binds fun bindNSClientSource(nsClientSourcePlugin: NSClientSourcePlugin): NSClientSource
         @Binds fun bindDexcomBoyda(dexcomPlugin: DexcomPlugin): DexcomBoyda
         @Binds fun bindXDrip(xdripSourcePlugin: XdripSourcePlugin): XDripSource
-        @Binds fun bindMobaiBgSource(mobaiSIAppPlugin: MobaiSIAppPlugin): BgSource // 确保这一行只出现一次
+        @Binds fun bindMobaiBgSource(mobaiSIAppPlugin: MobaiSIAppPlugin): BgSource
     }
 }
