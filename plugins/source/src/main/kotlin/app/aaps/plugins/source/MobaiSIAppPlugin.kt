@@ -45,6 +45,12 @@ class MobaiSIAppPlugin @Inject constructor(
     aapsLogger, rh
 ), BgSource {
 
+    init {
+        aapsLogger.debug(LTag.CORE, "MobaiSIAppPlugin 初始化完成")
+        aapsLogger.debug(LTag.CORE, "插件名称: ${rh.gs(R.string.mobai_si_app)}")
+        aapsLogger.debug(LTag.CORE, "插件类型: ${pluginDescription.mainType}")
+    }
+
     // 添加重写的 addPreferenceScreen 方法
     override fun addPreferenceScreen(preferenceManager: PreferenceManager, parent: PreferenceScreen, context: Context, requiredKey: String?) {
         aapsLogger.debug(LTag.CORE, "MobaiSIAppPlugin addPreferenceScreen called, requiredKey: $requiredKey")
