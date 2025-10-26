@@ -186,6 +186,7 @@ data class UserEntry(
         ConfigBuilder,      //From ConfigBuilder Plugin
         Overview,           //From OverViewPlugin
         Ottai,              //From Ottai plugin
+        Mobai,
         SyaiTag,            //From Syai Tag plugin
         Stats,              //From Stat Activity
         Aaps,               // MainApp

@@ -79,6 +79,7 @@ fun UserEntry.Sources.fromDb(): Sources =
         UserEntry.Sources.Database            -> Sources.Database
         UserEntry.Sources.Unknown             -> Sources.Unknown
         UserEntry.Sources.Ottai               -> Sources.Ottai
+        UserEntry.Sources.Mobai               -> Sources.Mobai
         UserEntry.Sources.SyaiTag             -> Sources.SyaiTag
     }
 
@@ -158,6 +159,7 @@ fun Sources.toDb(): UserEntry.Sources =
         Sources.Database            -> UserEntry.Sources.Database
         Sources.Unknown             -> UserEntry.Sources.Unknown
         Sources.Ottai               -> UserEntry.Sources.Ottai
+        Sources.Mobai               -> UserEntry.Sources.Mobai
         Sources.SyaiTag             -> UserEntry.Sources.SyaiTag
     }
 

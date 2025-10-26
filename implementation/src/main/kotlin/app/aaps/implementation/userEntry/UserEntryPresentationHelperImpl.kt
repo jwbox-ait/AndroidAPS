@@ -116,6 +116,7 @@ class UserEntryPresentationHelperImpl @Inject constructor(
         Sources.BgFragment          -> R.drawable.ic_aaps
         Sources.Ottai               -> R.drawable.ic_ottai
         Sources.SyaiTag             -> R.drawable.ic_syai_tag
+        Sources.Mobai               -> R.drawable.ic_syai_tag
     }
 
     override fun actionToColoredString(action: Action): Spanned = when (action) {

@@ -37,6 +37,7 @@ enum class SourceSensor(val text: String) {
     MM_600_SERIES("MM600Series"),
     OTTAI("Ottai"),
     MOBAI("MOBAI"),
+    Mobai("Mobai"),
     EVERSENSE("Eversense"),
     AIDEX("GlucoRx Aidex"),
     SYAI_TAG("Syai Tag"),
