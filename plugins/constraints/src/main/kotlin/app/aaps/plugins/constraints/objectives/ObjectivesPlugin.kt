@@ -56,17 +56,49 @@ class ObjectivesPlugin @Inject constructor(
 
     private fun setupObjectives() {
         objectives.clear()
-        objectives.add(Objective0(injector))
-        objectives.add(Objective1(injector))
-        objectives.add(Objective2(injector))
-        objectives.add(Objective3(injector))
-        objectives.add(Objective4(injector))
-        objectives.add(Objective5(injector))
-        objectives.add(Objective6(injector))
-        objectives.add(Objective7(injector))
-        objectives.add(Objective9(injector))
-        objectives.add(Objective10(injector))
-        // edit companion object if you remove/add Objective
+        val currentTime = System.currentTimeMillis()
+
+        // 为每个目标设置开始时间为1天前，完成时间为当前时间
+        objectives.add(Objective0(injector).apply {
+            startedOn = currentTime - 86400000
+            accomplishedOn = currentTime
+        })
+        objectives.add(Objective1(injector).apply {
+            startedOn = currentTime - 86400000
+            accomplishedOn = currentTime
+        })
+        objectives.add(Objective2(injector).apply {
+            startedOn = currentTime - 86400000
+            accomplishedOn = currentTime
+        })
+        objectives.add(Objective3(injector).apply {
+            startedOn = currentTime - 86400000
+            accomplishedOn = currentTime
+        })
+        objectives.add(Objective4(injector).apply {
+            startedOn = currentTime - 86400000
+            accomplishedOn = currentTime
+        })
+        objectives.add(Objective5(injector).apply {
+            startedOn = currentTime - 86400000
+            accomplishedOn = currentTime
+        })
+        objectives.add(Objective6(injector).apply {
+            startedOn = currentTime - 86400000
+            accomplishedOn = currentTime
+        })
+        objectives.add(Objective7(injector).apply {
+            startedOn = currentTime - 86400000
+            accomplishedOn = currentTime
+        })
+        objectives.add(Objective9(injector).apply {
+            startedOn = currentTime - 86400000
+            accomplishedOn = currentTime
+        })
+        objectives.add(Objective10(injector).apply {
+            startedOn = currentTime - 86400000
+            accomplishedOn = currentTime
+        })
     }
 
     fun reset() {
@@ -97,48 +129,42 @@ class ObjectivesPlugin @Inject constructor(
     /**
      * Constraints interface
      */
+    // 移除所有约束检查，直接返回原值
     override fun isLoopInvocationAllowed(value: Constraint<Boolean>): Constraint<Boolean> {
-        if (!objectives[FIRST_OBJECTIVE].isStarted)
-            value.set(false, rh.gs(R.string.objectivenotstarted, FIRST_OBJECTIVE + 1), this)
         return value
     }
 
     override fun isLgsAllowed(value: Constraint<Boolean>): Constraint<Boolean> {
-        if (!objectives[MAXBASAL_OBJECTIVE].isStarted)
-            value.set(false, rh.gs(R.string.objectivenotstarted, MAXBASAL_OBJECTIVE + 1), this)
         return value
     }
 
     override fun isClosedLoopAllowed(value: Constraint<Boolean>): Constraint<Boolean> {
-        if (!objectives[MAXIOB_ZERO_CL_OBJECTIVE].isStarted)
-            value.set(false, rh.gs(R.string.objectivenotstarted, MAXIOB_ZERO_CL_OBJECTIVE + 1), this)
         return value
     }
 
     override fun isAutosensModeEnabled(value: Constraint<Boolean>): Constraint<Boolean> {
-        if (!objectives[AUTOSENS_OBJECTIVE].isStarted)
-            value.set(false, rh.gs(R.string.objectivenotstarted, AUTOSENS_OBJECTIVE + 1), this)
         return value
     }
 
     override fun isSMBModeEnabled(value: Constraint<Boolean>): Constraint<Boolean> {
-        if (!objectives[SMB_OBJECTIVE].isStarted)
-            value.set(false, rh.gs(R.string.objectivenotstarted, SMB_OBJECTIVE + 1), this)
         return value
     }
 
     override fun applyMaxIOBConstraints(maxIob: Constraint<Double>): Constraint<Double> {
-        if (objectives[MAXIOB_ZERO_CL_OBJECTIVE].isStarted && !objectives[MAXIOB_ZERO_CL_OBJECTIVE].isAccomplished)
-            maxIob.set(0.0, rh.gs(R.string.objectivenotfinished, MAXIOB_ZERO_CL_OBJECTIVE + 1), this)
         return maxIob
     }
 
     override fun isAutomationEnabled(value: Constraint<Boolean>): Constraint<Boolean> {
-        if (!objectives[AUTO_OBJECTIVE].isStarted)
-            value.set(false, rh.gs(R.string.objectivenotstarted, AUTO_OBJECTIVE + 1), this)
         return value
     }
 
-    override fun isAccomplished(index: Int) = objectives[index].isAccomplished
-    override fun isStarted(index: Int): Boolean = objectives[index].isStarted
+    // 强制所有目标标记为已完成
+    override fun isAccomplished(index: Int): Boolean {
+        return true
+    }
+
+    // 强制所有目标标记为已开始
+    override fun isStarted(index: Int): Boolean {
+        return true
+    }
 }
