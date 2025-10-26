@@ -2,6 +2,9 @@ package app.aaps.plugins.source
 
 import android.annotation.SuppressLint
 import android.content.Context
+import androidx.preference.PreferenceCategory
+import androidx.preference.PreferenceManager
+import androidx.preference.PreferenceScreen
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import app.aaps.core.data.model.GV
@@ -15,7 +18,9 @@ import app.aaps.core.interfaces.logging.LTag
 import app.aaps.core.interfaces.plugin.PluginDescription
 import app.aaps.core.interfaces.resources.ResourceHelper
 import app.aaps.core.interfaces.source.BgSource
+import app.aaps.core.keys.BooleanKey
 import app.aaps.core.objects.workflow.LoggingWorker
+import app.aaps.core.validators.preferences.AdaptiveSwitchPreference
 import dagger.android.HasAndroidInjector
 import kotlinx.coroutines.Dispatchers
 import org.json.JSONArray
@@ -32,13 +37,34 @@ class MobaiSIAppPlugin @Inject constructor(
     PluginDescription()
         .mainType(PluginType.BGSOURCE)
         .fragmentClass(BGSourceFragment::class.java.name)
-        .pluginIcon(app.aaps.core.objects.R.drawable.ic_syai_tag) // 使用现有图标
+        .pluginIcon(app.aaps.core.objects.R.drawable.ic_syai_tag)
         .preferencesId(PluginDescription.PREFERENCE_SCREEN)
         .pluginName(R.string.mobai_si_app)
-        .preferencesVisibleInSimpleMode(false)
+        .preferencesVisibleInSimpleMode(true)  // 改为 true 确保可见
         .description(R.string.description_source_mobai_si_app),
     aapsLogger, rh
 ), BgSource {
+
+    // 添加重写的 addPreferenceScreen 方法
+    override fun addPreferenceScreen(preferenceManager: PreferenceManager, parent: PreferenceScreen, context: Context, requiredKey: String?) {
+        aapsLogger.debug(LTag.CORE, "MobaiSIAppPlugin addPreferenceScreen called, requiredKey: $requiredKey")
+
+        // 临时注释掉限制逻辑进行测试
+        // if (requiredKey != null) return
+
+        val category = PreferenceCategory(context)
+        parent.addPreference(category)
+        category.apply {
+            key = "mobai_bg_source_settings"
+            title = rh.gs(R.string.mobai_si_app)
+            initialExpandedChildrenCount = 0
+            addPreference(AdaptiveSwitchPreference(ctx = context,
+                                                   booleanKey = BooleanKey.BgSourceUploadToNs,
+                                                   title = app.aaps.core.ui.R.string.do_ns_upload_title))
+        }
+
+        aapsLogger.debug(LTag.CORE, "MobaiSIAppPlugin preference category added successfully")
+    }
 
     class MobaiSIAppWorker(
         context: Context,
