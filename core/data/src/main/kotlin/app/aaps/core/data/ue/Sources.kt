@@ -69,6 +69,7 @@ enum class Sources {
     ConfigBuilder,      //From ConfigBuilder Plugin
     Overview,           //From OverViewPlugin
     Ottai,              //From Ottai Plugin
+    Mobai,
     Stats,              //From Stat Activity
     Aaps,               // MainApp
     BgFragment,

@@ -40,4 +40,6 @@
     <!-- Patched Syai Tag App -->
     <string name="syai_tag_app">Syai Tag</string>
     <string name="description_source_patched_syai_tag_app">Receive glucose data from Syai Tag App.</string>
+    <string name="mobai_si_app">Mobai SI App</string>
+    <string name="description_source_mobai_si_app">Mobai SI App BG Source</string>
 </resources>

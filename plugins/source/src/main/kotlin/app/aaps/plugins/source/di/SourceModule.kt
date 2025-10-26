@@ -9,6 +9,8 @@ import app.aaps.plugins.source.GlimpPlugin
 import app.aaps.plugins.source.MM640gPlugin
 import app.aaps.plugins.source.NSClientSourcePlugin
 import app.aaps.plugins.source.OttaiPlugin
+import app.aaps.core.interfaces.source.BgSource
+import app.aaps.plugins.source.MobaiSIAppPlugin
 import app.aaps.plugins.source.PoctechPlugin
 import app.aaps.plugins.source.SyaiTagPlugin
 import app.aaps.plugins.source.TomatoPlugin
@@ -46,5 +48,6 @@ abstract class SourceModule {
         @Binds fun bindNSClientSource(nsClientSourcePlugin: NSClientSourcePlugin): NSClientSource
         @Binds fun bindDexcomBoyda(dexcomPlugin: DexcomPlugin): DexcomBoyda
         @Binds fun bindXDrip(xdripSourcePlugin: XdripSourcePlugin): XDripSource
+        @Binds fun bindMobaiBgSource(mobaiSIAppPlugin: MobaiSIAppPlugin): BgSource // 确保这一行只出现一次
     }
 }
